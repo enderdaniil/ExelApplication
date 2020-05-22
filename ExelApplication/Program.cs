@@ -110,6 +110,7 @@ namespace ExelApplication
                     }
                 }
             }
+
             private Microsoft.Office.Interop.Excel.Worksheet workSheet_1;
             private Microsoft.Office.Interop.Excel.Worksheet workSheet_2;
 
@@ -159,29 +160,94 @@ namespace ExelApplication
                 int lastRow_1 = workSheet_1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Row;
                 int lastRow_2 = workSheet_2.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Row;
 
+                int lengthOfFirst = workSheet_1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Column;
+                int lengthOfSecond = workSheet_2.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Column;
+
+                int firstSurenameNumber = 0;
+                for (int i = 1; i < lengthOfFirst + 1; i++)
+                {
+                    if (workSheet_1.Cells[1, i].ToString() == "Фамилия")
+                    {
+                        firstSurenameNumber = i;
+                        break;
+                    }
+                }
+
+                int firstNameNumber = 1;
+                for (int i = 1; i < lengthOfFirst + 1; i++)
+                {
+                    if (workSheet_1.Cells[1, i].ToString() == "Имя")
+                    {
+                        firstNameNumber = i;
+                        break;
+                    }
+                }
+
+                int firstPatronymicNumber = 2;
+                for (int i = 1; i < lengthOfFirst + 1; i++)
+                {
+                    if (workSheet_1.Cells[1, i].ToString() == "Отчество")
+                    {
+                        firstPatronymicNumber = i;
+                        break;
+                    }
+                }
+
+
+                int secondSurenameNumber = 0;
+                for (int i = 1; i < lengthOfSecond + 1; i++)
+                {
+                    if (workSheet_1.Cells[1, i].ToString() == "Фамилия")
+                    {
+                        secondSurenameNumber = i;
+                        break;
+                    }
+                }
+
+                int secondNameNumber = 1;
+                for (int i = 1; i < lengthOfSecond + 1; i++)
+                {
+                    if (workSheet_1.Cells[1, i].ToString() == "Имя")
+                    {
+                        secondNameNumber = i;
+                        break;
+                    }
+                }
+
+                int secondPatronymicNumber = 2;
+                for (int i = 1; i < lengthOfSecond + 1; i++)
+                {
+                    if (workSheet_1.Cells[1, i].ToString() == "Отчество")
+                    {
+                        secondPatronymicNumber = i;
+                        break;
+                    }
+                }
+
                 for (int i = 2; i < lastRow_1 + 1; i++)
                 {
-                    string surename = workSheet_1.Cells[i, 4].ToString();
-                    string name = workSheet_1.Cells[i, 5].ToString();
-                    string patronymic = workSheet_1.Cells[i, 6].ToString();
+                    string surename = workSheet_1.Cells[i, firstSurenameNumber].ToString();
+                    string name = workSheet_1.Cells[i, firstNameNumber].ToString();
+                    string patronymic = workSheet_1.Cells[i, firstPatronymicNumber].ToString();
                     Human currentHuman = new Human(name, surename, patronymic);
                     firstSheetPeople.Add(currentHuman);
                 }
 
                 for (int i = 2; i < lastRow_2 + 1; i++)
                 {
-                    string surename = workSheet_2.Cells[i, 4].ToString();
-                    string name = workSheet_2.Cells[i, 5].ToString();
-                    string patronymic = workSheet_2.Cells[i, 6].ToString();
+                    string surename = workSheet_2.Cells[i, secondSurenameNumber].ToString();
+                    string name = workSheet_2.Cells[i, secondNameNumber].ToString();
+                    string patronymic = workSheet_2.Cells[i, secondPatronymicNumber].ToString();
                     Human currentHuman = new Human(name, surename, patronymic);
                     secondSheetPeople.Add(currentHuman);
                 }
 
                 List<Human> missingPeople = new List<Human>();
 
+                bool exist = false;
                 for (int i = 0; i < lastRow_1; i++)
                 {
-                    bool exist = false;
+                    exist = false;
                     for (int j = 0; j < lastRow_2; j++)
                     {
                         if (firstSheetPeople[i] == secondSheetPeople[j])
@@ -215,30 +281,95 @@ namespace ExelApplication
                     List<Human> secondSheetPeople = new List<Human>();
                     int lastRow_1 = workSheet_1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Row;
                     int lastRow_2 = workSheet_2.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Row;
+                    
+                    int lengthOfFirst = workSheet_1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Column;
+                    int lengthOfSecond = workSheet_2.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Column;
+
+                    int firstSurenameNumber = 0;
+                    for (int i = 1; i < lengthOfFirst + 1; i++)
+                    {
+                        if (workSheet_1.Cells[1, i].ToString() == "Фамилия")
+                        {
+                            firstSurenameNumber = i;
+                            break;
+                        }
+                    }
+
+                    int firstNameNumber = 1;
+                    for (int i = 1; i < lengthOfFirst + 1; i++)
+                    {
+                        if (workSheet_1.Cells[1, i].ToString() == "Имя")
+                        {
+                            firstNameNumber = i;
+                            break;
+                        }
+                    }
+
+                    int firstPatronymicNumber = 2;
+                    for (int i = 1; i < lengthOfFirst + 1; i++)
+                    {
+                        if (workSheet_1.Cells[1, i].ToString() == "Отчество")
+                        {
+                            firstPatronymicNumber = i;
+                            break;
+                        }
+                    }
+
+                    
+                    int secondSurenameNumber = 0;
+                    for (int i = 1; i < lengthOfSecond + 1; i++)
+                    {
+                        if (workSheet_1.Cells[1, i].ToString() == "Фамилия")
+                        {
+                            secondSurenameNumber = i;
+                            break;
+                        }
+                    }
+
+                    int secondNameNumber = 1;
+                    for (int i = 1; i < lengthOfSecond + 1; i++)
+                    {
+                        if (workSheet_1.Cells[1, i].ToString() == "Имя")
+                        {
+                            secondNameNumber = i;
+                            break;
+                        }
+                    }
+
+                    int secondPatronymicNumber = 2;
+                    for (int i = 1; i < lengthOfSecond + 1; i++)
+                    {
+                        if (workSheet_1.Cells[1, i].ToString() == "Отчество")
+                        {
+                            secondPatronymicNumber = i;
+                            break;
+                        }
+                    }
 
                     for (int i = 2; i < lastRow_1 + 1; i++)
                     {
-                        string surename = workSheet_1.Cells[i, 4].ToString();
-                        string name = workSheet_1.Cells[i, 5].ToString();
-                        string patronymic = workSheet_1.Cells[i, 6].ToString();
+                        string surename = workSheet_1.Cells[i, firstSurenameNumber].ToString();
+                        string name = workSheet_1.Cells[i, firstNameNumber].ToString();
+                        string patronymic = workSheet_1.Cells[i, firstPatronymicNumber].ToString();
                         Human currentHuman = new Human(name, surename, patronymic);
                         firstSheetPeople.Add(currentHuman);
                     }
 
                     for (int i = 2; i < lastRow_2 + 1; i++)
                     {
-                        string surename = workSheet_2.Cells[i, 4].ToString();
-                        string name = workSheet_2.Cells[i, 5].ToString();
-                        string patronymic = workSheet_2.Cells[i, 6].ToString();
+                        string surename = workSheet_2.Cells[i, secondSurenameNumber].ToString();
+                        string name = workSheet_2.Cells[i, secondNameNumber].ToString();
+                        string patronymic = workSheet_2.Cells[i, secondPatronymicNumber].ToString();
                         Human currentHuman = new Human(name, surename, patronymic);
                         secondSheetPeople.Add(currentHuman);
                     }
 
                     List<Human> missingPeople = new List<Human>();
 
+                    bool exist = false;
                     for (int i = 0; i < lastRow_2; i++)
                     {
-                        bool exist = false;
+                        exist = false;
                         for (int j = 0; j < lastRow_1; j++)
                         {
                             if (firstSheetPeople[i] == secondSheetPeople[j])
