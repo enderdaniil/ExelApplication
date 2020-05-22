@@ -122,36 +122,33 @@ namespace ExelApplication
             public void GetFiles(string file_1, string file_2)
             {
                 // Получить объект приложения Excel.
-                Excel.Application excelApp_1 = new Excel.ApplicationClass();
+                excelApp_1 = new Excel.ApplicationClass();
 
                 // Сделать Excel невидимым (необязательно).
                 excelApp_1.Visible = false;
 
                 // Откройте рабочую книгу только для чтения.
-                Excel.Workbook workBook_1 = excelApp_1.Workbooks.Open(
+                workBook_1 = excelApp_1.Workbooks.Open(
                     file_1,
                     Type.Missing, true, Type.Missing, Type.Missing,
                     Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                     Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                     Type.Missing, Type.Missing);
 
-                Microsoft.Office.Interop.Excel.Worksheet workSheet_1;
                 workSheet_1 = (Microsoft.Office.Interop.Excel.Worksheet)workBook_1.Sheets[1];
 
-
-                Excel.Application excelApp_2 = new Excel.ApplicationClass();
+                excelApp_2 = new Excel.ApplicationClass();
 
                 // Сделать Excel невидимым (необязательно).
                 excelApp_1.Visible = false;
 
-                Excel.Workbook workBook_2 = excelApp_2.Workbooks.Open(
+                workBook_2 = excelApp_2.Workbooks.Open(
                     file_2,
                     Type.Missing, true, Type.Missing, Type.Missing,
                     Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                     Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                     Type.Missing, Type.Missing);
 
-                Microsoft.Office.Interop.Excel.Worksheet workSheet_2;
                 workSheet_2 = (Microsoft.Office.Interop.Excel.Worksheet)workBook_2.Sheets[1];
             }
 
@@ -162,20 +159,20 @@ namespace ExelApplication
                 int lastRow_1 = workSheet_1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Row;
                 int lastRow_2 = workSheet_2.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Row;
 
-                for (int i = 0; i < lastRow_1; i++)
+                for (int i = 2; i < lastRow_1 + 1; i++)
                 {
-                    string surename = workSheet_1.Cells[i, 1].ToString();
-                    string name = workSheet_1.Cells[i, 2].ToString();
-                    string patronymic = workSheet_1.Cells[i, 3].ToString();
+                    string surename = workSheet_1.Cells[i, 4].ToString();
+                    string name = workSheet_1.Cells[i, 5].ToString();
+                    string patronymic = workSheet_1.Cells[i, 6].ToString();
                     Human currentHuman = new Human(name, surename, patronymic);
                     firstSheetPeople.Add(currentHuman);
                 }
 
-                for (int i = 0; i < lastRow_2; i++)
+                for (int i = 2; i < lastRow_2 + 1; i++)
                 {
-                    string surename = workSheet_2.Cells[i, 1].ToString();
-                    string name = workSheet_2.Cells[i, 2].ToString();
-                    string patronymic = workSheet_2.Cells[i, 3].ToString();
+                    string surename = workSheet_2.Cells[i, 4].ToString();
+                    string name = workSheet_2.Cells[i, 5].ToString();
+                    string patronymic = workSheet_2.Cells[i, 6].ToString();
                     Human currentHuman = new Human(name, surename, patronymic);
                     secondSheetPeople.Add(currentHuman);
                 }
@@ -219,20 +216,20 @@ namespace ExelApplication
                     int lastRow_1 = workSheet_1.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Row;
                     int lastRow_2 = workSheet_2.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing).Row;
 
-                    for (int i = 0; i < lastRow_1; i++)
+                    for (int i = 2; i < lastRow_1 + 1; i++)
                     {
-                        string surename = workSheet_1.Cells[i, 1].ToString();
-                        string name = workSheet_1.Cells[i, 2].ToString();
-                        string patronymic = workSheet_1.Cells[i, 3].ToString();
+                        string surename = workSheet_1.Cells[i, 4].ToString();
+                        string name = workSheet_1.Cells[i, 5].ToString();
+                        string patronymic = workSheet_1.Cells[i, 6].ToString();
                         Human currentHuman = new Human(name, surename, patronymic);
                         firstSheetPeople.Add(currentHuman);
                     }
 
-                    for (int i = 0; i < lastRow_2; i++)
+                    for (int i = 2; i < lastRow_2 + 1; i++)
                     {
-                        string surename = workSheet_2.Cells[i, 1].ToString();
-                        string name = workSheet_2.Cells[i, 2].ToString();
-                        string patronymic = workSheet_2.Cells[i, 3].ToString();
+                        string surename = workSheet_2.Cells[i, 4].ToString();
+                        string name = workSheet_2.Cells[i, 5].ToString();
+                        string patronymic = workSheet_2.Cells[i, 6].ToString();
                         Human currentHuman = new Human(name, surename, patronymic);
                         secondSheetPeople.Add(currentHuman);
                     }
